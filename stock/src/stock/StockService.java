@@ -1,25 +1,28 @@
 package stock;
 
-import java.util.ArrayList;
 import java.util.Scanner;
+
+import Trade.TradeService;
 
 public class StockService {
 	private StockDao dao;
+	private TradeService t;
 	public StockService() {
 		dao = new StockDao();
+		t=new TradeService();
 	}
 	public void addStock(Scanner sc,String name) {
 		System.out.println("상장 가격: ");
 		int price = sc.nextInt();
 		dao.insert(new Stock(0,name,price,0));
+		t.addSellAdimin(dao.findByname(name).getStock_id());
 	}
-//	public void updatestock(int id, int cur, int change) {
-//		System.out.println("주가 갱신");
-//		dao.update(new Stock(id,"",cur,change));
-//	}
-	public void delStock(int num) {
+	
+	
+	public void delStock(Scanner sc) {
 		System.out.println("주식 삭제");
-		dao.delete(num);
+		String name=sc.next();
+		dao.delete(name);
 	}
 	public void findByStock_id(Scanner sc) {
 		System.out.println("stock id: ");
@@ -37,16 +40,18 @@ public class StockService {
 		}
 	}
 	public void changeStock() {
-		
 		for (Stock s : dao.findAll()) {
 			int random0to100P = (int) (Math.random() * 1000);
 			int random0to100M = (int) (Math.random() * -1000);
 			int m = s.getTotal()+(random0to100P+random0to100M);
+			System.out.println(m);
 			double c = (double) (m-s.getTotal())/s.getTotal()*100;
 			s.setTotal(m);
 			s.setPrice_number(Math.round(c)*1000/1000.0);
 			System.out.println(Math.round(c)*1000/1000.0);
+			System.out.println(s);
 			dao.update(s);
+			
 		}
 	}
 	public void up() {
@@ -64,5 +69,5 @@ public class StockService {
 		
 		}
 	}
-	
+	 
 }
