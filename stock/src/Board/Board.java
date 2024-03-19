@@ -1,5 +1,5 @@
 package Board;
-//vo
+
 import java.sql.Date;
 
 public class Board {
