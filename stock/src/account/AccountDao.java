@@ -10,8 +10,8 @@ import Trade.Trade;
 
 public class AccountDao {
 	private DBConnect db;
-	// Account DAO
-	public AccountDao() {
+	// Account DAO  
+	public AccountDao() { 
 		db = DBConnect.getInstance();
 	}
 	public void insert(Account a) {
