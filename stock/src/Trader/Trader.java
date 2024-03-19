@@ -1,5 +1,5 @@
 package Trader;
-// vo
+
 public class Trader {
 	private int trader_num; 
 	private String trader_id; // pk
