@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 import Trader.Trader;
 import Trader.TraderDao;
-
+//Account Service
 public class AccountService {
 
 	private AccountDao dao;

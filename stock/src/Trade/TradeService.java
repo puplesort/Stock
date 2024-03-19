@@ -12,7 +12,7 @@ import company.CompanyDao;
 import stock.Stock;
 import stock.StockDao;
 import stock.StockService;
-
+// Trade Service
 public class TradeService {
 	private TradeDao dao;
 	private StockDao stdao;
