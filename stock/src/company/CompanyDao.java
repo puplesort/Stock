@@ -6,16 +6,16 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import DBConnect.DBConnection;
+import DBConnect.DBConnect;
 
 public class CompanyDao {
-	private DBConnection dbConnection;
+	private DBConnect dbConnection;
 	public CompanyDao() {
-		dbConnection = DBConnection.getInstance();
+		dbConnection = DBConnect.getInstance();
 	}
 	public int insert(Company c) {
 		Connection conn = dbConnection.conn();
-		String sql = "insert into company values(company_id,?,?,?,?,?,?)";
+		String sql = "insert into company values(seq_company.nextval,?,?,?,?,?,?)";
 		int cnt = 0;
 		try {
 			PreparedStatement ps = conn.prepareStatement(sql);

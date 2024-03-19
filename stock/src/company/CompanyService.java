@@ -1,19 +1,19 @@
 package company;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.Scanner;
 
+import Trade.TradeService;
+import stock.StockDao;
 import stock.StockService;
 
 public class CompanyService {
 	private CompanyDao dao;
 	private StockService sservice;
+	private StockDao sdao;
 	public CompanyService() {
 		dao = new CompanyDao();
 		sservice = new StockService();
+		sdao=new StockDao();
 	}
 	public void addCom(Scanner sc) {
 		System.out.println("=== 회사 추가 ===");
@@ -31,6 +31,7 @@ public class CompanyService {
 		sc.nextLine();
 		dao.insert(new Company(0,name,ceo_name,dateString,holding,volume,info));
 		sservice.addStock(sc,name);
+		
 	}
 	
 	public void editCom(Scanner sc) {
@@ -45,7 +46,7 @@ public class CompanyService {
 		String name = sc.next();
 		System.out.println("new ceo name:");
 		String ceo_name = sc.next();
-		System.out.println("update holding: "); 
+		System.out.println("update holding: ");
 		int holding = sc.nextInt();
 		System.out.println("update information: ");
 		String info = sc.next();
@@ -60,14 +61,16 @@ public class CompanyService {
 		dao.updateVol(new Company(id,"","",null,0,vol,""));
 	}
 	
-	public void deleteCom(int id) {
+	public void deleteCom(Scanner sc) {
 		System.out.println("=== 회사 제거 ===");
-		if(dao.findByNum(id)==null) {
+		int num=sc.nextInt();
+		if(dao.findByNum(num)==null) {
 			System.out.println("not found");
 			return;
 	}
-		dao.delete(id);
-		sservice.delStock(id);
+		Company c=dao.findByNum(num);
+		dao.delete(c.getCompany_id());
+		sdao.delete(c.getCompany_name());
 	}
 	public Company findByCom(int id) {
 		if(dao.findByNum(id)==null) {
@@ -82,4 +85,14 @@ public class CompanyService {
 			System.out.println(c);
 		}
 	}
+
+
+	
+	
+	
+	
+	
+	
+	
+	
 }
