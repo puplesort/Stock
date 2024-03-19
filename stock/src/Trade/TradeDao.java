@@ -11,7 +11,7 @@ import DBConnect.DBConnect;
 public class TradeDao {
 
 	private DBConnect db;
-
+	// Trade DAO
 	public TradeDao() {
 		db = DBConnect.getInstance();
 	}
